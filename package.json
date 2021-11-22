@@ -1,0 +1,19 @@
+{
+  "name": "mojadielna_scripts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "load-stock.js",
+  "scripts": {
+    "babel:compile": "babel src/web/js/load-stock.js -o src/web/js/load-stock.min.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://github.com/Matej-ch/yii2-parcel#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.16.0",
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.0",
+    "babel-preset-minify": "^0.5.1"
+  }
+}
