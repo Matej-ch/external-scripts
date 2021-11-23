@@ -113,15 +113,15 @@ if (typeof document.getElementsByClassName("product-detail-container")[0] != "un
 
         //tato cast ma na starosti cekovanie na ktory produkt sa uzivatel pozeral
         if (code_trimmed) {
-            $.getJSON('https://api.ipify.org?format=jsonp&callback=?', function (data) {
-                let ip = data['ip'];
-                let country_code = 'SK';
-                let visitor_url = "URL HERE" + code_trimmed + "&ip=" + ip + "&country=" + country_code + "&eshopID=1";
-                $.ajax({
-                    type: "GET", url: visitor_url, success: function (data) {
-                    },
-                });
-            });
+            fetch('https://api.ipify.org?format=jsonp&callback=?')
+                .then(res => res.json())
+                .then(data => {
+                    const ip = data['ip'];
+                    const country_code = 'SK';
+                    const visitor_url = "URL HERE" + code_trimmed + "&ip=" + ip + "&country=" + country_code + "&eshopID=1";
+                    fetch(visitor_url);
+
+                }).catch(err => console.error('Get ip from ipify: ',err))
         }
     });
 }
