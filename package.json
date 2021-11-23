@@ -2,9 +2,9 @@
   "name": "mojadielna_scripts",
   "version": "1.0.0",
   "description": "",
-  "main": "load-stock.js",
+  "main": "src/load-stock.js",
   "scripts": {
-    "babel:compile": "babel src/web/js/load-stock.js -o src/web/js/load-stock.min.js"
+    "babel:compile": "babel src/load-stock.js -o src/load-stock.min.js"
   },
   "keywords": [],
   "author": "",
