@@ -4,8 +4,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     if (document.querySelector('.product-detail-container')) {
         var code_trimmed = '';
-        var stock_data = document.querySelector("input[name='stock']").value;
-        var hidden_npt = document.querySelector("input[name='stock']"); //hidden input
 
         var product_code = document.querySelector("input[name='number']"); //hidden input
 
@@ -23,7 +21,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
         }
 
         var url_adr = "URL_HERE" + encoded_code;
-        var text_from_warehouse = '';
         var isDotaz = false;
 
         if (code_trimmed) {
@@ -32,7 +29,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 .then(res => res.json())
                 .then(data => {
                     td_for_info.querySelector('span').remove();
-                    let availability_text = document.getElementById("warehouse-availability-text");
 
                     let productData = data[code_trimmed];
                     if (productData === undefined) {
