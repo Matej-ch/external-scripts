@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/load-stock.js",
   "scripts": {
-    "babel:compile": "babel src/load-stock.js -o src/load-stock.min.js"
+    "babel:compile": "babel src --out-dir build"
   },
   "keywords": [],
   "author": "",
