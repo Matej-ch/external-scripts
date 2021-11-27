@@ -1,0 +1,1 @@
+Collection of scripts used for third party eshops, for pulling data about stock

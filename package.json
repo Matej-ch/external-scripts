@@ -1,15 +1,21 @@
 {
-  "name": "mojadielna_scripts",
+  "name": "@mtjch/eshop_ext_scripts",
   "version": "1.0.0",
-  "description": "",
-  "main": "src/load-stock.js",
+  "description": "Collection of scripts for third party eshops",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "src/product-detail.js",
   "scripts": {
     "babel:compile": "babel src --out-dir build"
   },
   "keywords": [],
-  "author": "",
+  "author": "Matej ch",
   "license": "ISC",
-  "homepage": "https://github.com/Matej-ch/yii2-parcel#readme",
+  "bugs": {
+    "url": "https://github.com/Matej-ch/external-scripts/issues"
+  },
+  "homepage": "https://github.com/Matej-ch/external-scripts#readme",
   "devDependencies": {
     "@babel/cli": "^7.16.0",
     "@babel/core": "^7.16.0",
