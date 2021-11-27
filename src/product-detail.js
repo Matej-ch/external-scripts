@@ -2,6 +2,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
     var supp_availability = 0;
     var our_availability = 0;
 
+    function isInViewport(elem) {
+        const bounding = elem.getBoundingClientRect();
+        return (
+            bounding.top >= 0 &&
+            bounding.left >= 0 &&
+            bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            bounding.right <= (window.innerWidth || document.documentElement.clientWidth));
+    }
+
     if (document.querySelector('.product-detail-container')) {
         var code_trimmed = '';
 
@@ -209,6 +218,46 @@ window.addEventListener('DOMContentLoaded', (event) => {
         if(stockNoDivEl) { stockNoDivEl.remove(); }
         if(stockNoEl) { stockNoEl.remove() }
         if(stockYesEl) { stockYesEl.remove(); }
+
+        function fillSticky() {
+            if (document.getElementById('detail_src_magnifying_small')) {
+                document.querySelector('.img-sticky img').src = document.getElementById('detail_src_magnifying_small').src;
+            }
+
+            document.querySelector('.name-sticky').innerText = document.querySelector('h1').innerText;
+            document.querySelector('.price-sticky .price_no_vat-sticky').innerText = document.querySelector('.price-novat').innerText;
+            document.querySelector('.price-sticky .price_vat-sticky').innerText = document.querySelector('.price-vat .price-value.def_color').innerText;
+            document.getElementById('buy_btn_container-sticky').appendChild(document.querySelector('.cart-info-btn').cloneNode(true));
+            document.querySelector('.basket-sticky').appendChild(document.getElementById('basket_icon').cloneNode(true));
+            document.querySelector('.affix-sticky__container').classList.add('affix');
+        }
+
+        var wasScrolled = false;
+        var elementTarget = document.querySelector(".product-cart-info-value .cart-info-btn");
+        var stickyContainer = document.querySelector('.affix-sticky__container');
+
+        window.addEventListener("scroll", function () {
+            if (!isInViewport(elementTarget) && !wasScrolled) {
+                fillSticky();
+                wasScrolled = true;
+            } else if (isInViewport(elementTarget) && stickyContainer.classList.contains('affix')) {
+                document.querySelector('#buy_btn_container-sticky .cart-info-btn').remove();
+                document.querySelector('.basket-sticky #basket_icon').remove();
+                document.querySelector('.affix-sticky__container').classList.remove('affix');
+                wasScrolled = false;
+            }
+        });
+
+        document.querySelector('body').addEventListener('click', (e) => {
+            if (e.target.id === 'buy_btn' && e.target.parentElement.parentElement.id === 'buy_btn_container-sticky') {
+                $('.product-price-box .product-cart-btn').trigger('click');
+            }
+        });
+        document.querySelector('body').addEventListener('touchend', (e) => {
+            if (e.target.id === 'buy_btn' && e.target.parentElement.parentElement.id === 'buy_btn_container-sticky') {
+                $('.product-price-box .product-cart-btn').trigger('click');
+            }
+        });
     }
 });
 
