@@ -161,6 +161,54 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 }
             })
             .catch(err => console.error('Error fetching product categories',err))
+
+
+        document.querySelector('body').addEventListener('click',e => {
+            if(e.target.classList.contains('info-about-delivery')) {
+                let targetTag = e.target.querySelector('a');
+                targetTag.preventDefault();
+
+                if(!document.querySelector('td#js-custom-cell')) {
+                    let infoText = '';
+
+                    if (("text" in targetTag.dataset)) {
+                        infoText = targetTag.dataset.text;
+                    } else {
+                        infoText = 'Platí pre objednávky ktoré obsahujú všetky produkty s informáciou expedujeme ihneď.<br>';
+
+                        if (our_availability > 0 && our_availability <= 20) {
+                            infoText += '<p style="padding-bottom:10px;padding-top:10px;">Dostupnosť u nás ' + our_availability + 'ks</p>';
+                        } else if (our_availability > 20) {
+                            infoText += '<p style="padding-bottom:10px;padding-top:10px;">Dostupnosť u nás > ' + 20 + 'ks</p>';
+                        }
+
+                        if (supp_availability > 0 && supp_availability <= 20) {
+                            infoText += '<p style="padding-bottom:10px;padding-top:10px;">Posledná Dostupnosť u dodávateľa ' + supp_availability + 'ks</p>';
+                        } else if (supp_availability > 20) {
+                            infoText += '<p style="padding-bottom:10px;padding-top:10px;">Posledná dostupnosť u dodávateľa > ' + 20 + 'ks</p>';
+                        }
+
+                        infoText += '<a href="https://www.mojadielna.sk/geko/5-ZAKAZNICKA-PODPORA/4-Poslat-otazku-predajcovi" target="_blank">Pre informácie o objednaní viac ako 20 kusov nás kontaktuje</a>'
+                    }
+
+                    const rowEl = document.createElement('tr');
+                    rowEl.classList.add('before_variants');
+                    rowEl.innerHTML = '</td><td colspan="3" width="65%" style="background-color:#cce5ff;color:#004085;font-weight:bold;" id="js-custom-cell">' + infoText + '</td>';
+                    targetTag.parentElement.parentElement.parentElement.parentElement.appendChild(rowEl);
+                }
+            }
+        })
+
+        if (window.location.href !== 'https://www.mojadielna.sk/' && window.location.href !== 'https://www.mojadielna.sk') {
+            document.querySelector('#expandableMenu .root-eshop-menu > .sub').style.display = 'block';
+        }
+
+        const stockNoEl = document.querySelector('table.cart tr.stock-line-stock_no');
+        const stockYesEl = document.querySelector('table.cart tr.stock-line-stock_yes');
+        const stockNoDivEl = document.querySelector('.div.box-spc>div.stock_no');
+        if(stockNoDivEl) { stockNoDivEl.remove(); }
+        if(stockNoEl) { stockNoEl.remove() }
+        if(stockYesEl) { stockYesEl.remove(); }
     }
 });
 
