@@ -12,36 +12,40 @@ window.addEventListener('DOMContentLoaded', (event) => {
     }
 
     if (document.querySelector('.product-detail-container')) {
-        var code_trimmed = '';
 
-        var product_code = document.querySelector("input[name='number']"); //hidden input
+        const productDetailScriptTag = document.getElementById('product-detail-script')
+        const productDetailUrl = productDetailScriptTag.getAttribute("data-url");
+
+        var codeTrimmed = '';
+
+        var productCode = document.querySelector("input[name='number']"); //hidden input
 
         var td_for_info = document.querySelector(".price-value.def_color.product-stock-value");
         var div_for_quest_btn = document.querySelector(".fright.textright");
 
-        if (product_code.length) {
-            product_code = product_code.value;
+        if (productCode.length) {
+            productCode = productCode.value;
             if (document.querySelector(".before_variants.stock-line.stock-line-")) {
                 document.querySelector(".before_variants.stock-line.stock-line-").remove();
             }
 
-            code_trimmed = product_code.trim();
-            var encoded_code = encodeURIComponent(product_code);
+            codeTrimmed = productCode.trim();
+            var codeEncoded = encodeURIComponent(productCode);
         }
 
-        var url_adr = "URL_HERE" + encoded_code;
+        var url_adr = productDetailUrl + codeEncoded;
         var isDotaz = false;
 
-        if (code_trimmed) {
+        if (codeTrimmed) {
 
             fetch(url_adr)
                 .then(res => res.json())
                 .then(data => {
                     td_for_info.querySelector('span').remove();
 
-                    let productData = data[code_trimmed];
+                    let productData = data[codeTrimmed];
                     if (productData === undefined) {
-                        productData = data[code_trimmed.toUpperCase()];
+                        productData = data[codeTrimmed.toUpperCase()];
                     }
 
                     supp_availability = productData['supp_availability'];
@@ -136,13 +140,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 
         //tato cast ma na starosti cekovanie na ktory produkt sa uzivatel pozeral
-        if (code_trimmed) {
+        if (codeTrimmed) {
             fetch('https://api.ipify.org?format=jsonp&callback=?')
                 .then(res => res.json())
                 .then(data => {
                     const ip = data['ip'];
                     const country_code = 'SK';
-                    const visitor_url = "URL HERE" + code_trimmed + "&ip=" + ip + "&country=" + country_code + "&eshopID=1";
+                    const visitor_url = "URL HERE" + codeTrimmed + "&ip=" + ip + "&country=" + country_code + "&eshopID=1";
                     fetch(visitor_url);
 
                 }).catch(err => console.error('Get ip from ipify: ', err))

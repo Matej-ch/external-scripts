@@ -2,8 +2,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (document.querySelector('.cart.cart-items')) {
 
+        const cartProductsScriptTag = document.getElementById('cart-products-script')
+        const cartProductsUrl = cartProductsScriptTag.getAttribute("data-url");
+
         async function loadProductData(ids, isWebareal = 0) {
-            let url = "URL PRODUCT DATA LOADING HERE" + ids.join('&') + '&isWebareal=' + isWebareal;
+            let url = cartProductsUrl + ids.join('&') + '&isWebareal=' + isWebareal;
             let response = {error: 0, data: null, success: false};
             await fetch(url).then(res => res.json()).then(data => {
                 response = {error: 0, data: data, success: true};

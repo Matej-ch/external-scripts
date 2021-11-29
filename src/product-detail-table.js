@@ -32,9 +32,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     }
                 }
 
+                const productDetailTableScriptTag = document.getElementById('products-table-script')
+                const productDetailTableUrl = productDetailTableScriptTag.getAttribute("data-url");
+
                 async function getDataForProductsTable() {
                     await waitForProductCodesParsing(500);
-                    let urlForProducts = "URL HERE" + productCodesString.join('&');
+                    let urlForProducts = productDetailTableUrl + productCodesString.join('&');
 
                     fetch(urlForProducts)
                         .then(res => res.json())
