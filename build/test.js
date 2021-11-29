@@ -1,1 +1,1 @@
-"use strict";window.addEventListener("DOMContentLoaded",function(){console.log("this is a test script"),console.log(document.currentScript.dataset.url)});
+"use strict";window.addEventListener("DOMContentLoaded",function(){console.log("this is a test script");var a=document.getElementById("searcher"),b=a.getAttribute("data-url");console.log(b)});
