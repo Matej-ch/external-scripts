@@ -4,4 +4,12 @@ test script
 
 https://cdn.jsdelivr.net/npm/@mtjch/eshop_ext_scripts@1.0.0/build/test.js
 
-script needs to have id and data-url
+script needs to have id and `data-url`
+
+product-detail-table.js needs `data-url` attribute
+
+cart.js needs `data-url` attribute
+
+categories.js needs `data-url` attribute
+
+product-detail.js needs `data-url` attribute and `data-cat-url`  and `data-base-url`

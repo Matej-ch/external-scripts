@@ -15,6 +15,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
         const productDetailScriptTag = document.getElementById('product-detail-script')
         const productDetailUrl = productDetailScriptTag.getAttribute("data-url");
+        const baseUrl = productDetailScriptTag.getAttribute("data-base-url");
 
         var codeTrimmed = '';
 
@@ -127,7 +128,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
                             if(div_for_quest_btn) {
                                 const aTag = document.createElement('a');
-                                aTag.setAttribute('href','https://www.mojadielna.sk/geko/5-ZAKAZNICKA-PODPORA/4-Poslat-otazku-predajcovi');
+
+                                aTag.setAttribute('href',`${baseUrl}/geko/5-ZAKAZNICKA-PODPORA/4-Poslat-otazku-predajcovi`);
                                 aTag.innerHTML = '<input type="button" class="question_btn_custom" id="buy_btn" name="question_sbmt" value="Dotaz">';
                                 div_for_quest_btn.appendChild(aTag);
                             }
@@ -154,11 +156,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
         const productID = document.getElementById('stars_main').dataset.productId;
 
-        fetch("URL FOR CATEGORIES HERE" + productID)
+        const productCategoriesUrl = productDetailScriptTag.getAttribute("data-cat-url");
+
+        fetch(productCategoriesUrl + productID)
             .then(res => res.json())
             .then(data => {
                 if (data['success'] === true && data['categories']) {
-                    let catHtml = ' |  <a href="//www.mojadielna.sk/geko">Úvod</a> <span class="arrow">»</span> ';
+                    let catHtml = ' |  <a href="' + baseUrl + '/geko">Úvod</a> <span class="arrow">»</span> ';
                     data['categories'].forEach(function (element) {
                         catHtml += '<a href="' + element['full_url'] + '">' + element['catName'] + '</a> <span class="arrow">»</span> ';
                     });
@@ -201,7 +205,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             infoText += '<p style="padding-bottom:10px;padding-top:10px;">Posledná dostupnosť u dodávateľa > ' + 20 + 'ks</p>';
                         }
 
-                        infoText += '<a href="https://www.mojadielna.sk/geko/5-ZAKAZNICKA-PODPORA/4-Poslat-otazku-predajcovi" target="_blank">Pre informácie o objednaní viac ako 20 kusov nás kontaktuje</a>'
+
+                        infoText += '<a href="'+baseUrl+'/geko/5-ZAKAZNICKA-PODPORA/4-Poslat-otazku-predajcovi" target="_blank">Pre informácie o objednaní viac ako 20 kusov nás kontaktuje</a>'
                     }
 
                     const rowEl = document.createElement('tr');
@@ -212,7 +217,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             }
         })
 
-        if (window.location.href !== 'https://www.mojadielna.sk/' && window.location.href !== 'https://www.mojadielna.sk') {
+        if (window.location.href !== `${baseUrl}/` && window.location.href !== `${baseUrl}`) {
             document.querySelector('#expandableMenu .root-eshop-menu > .sub').style.display = 'block';
         }
 
@@ -254,12 +259,19 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
         document.querySelector('body').addEventListener('click', (e) => {
             if (e.target.id === 'buy_btn' && e.target.parentElement.parentElement.id === 'buy_btn_container-sticky') {
-                $('.product-price-box .product-cart-btn').trigger('click');
+                const cartBtnEl = document.querySelector('.product-price-box .product-cart-btn');
+                if(cartBtnEl) {
+                    cartBtnEl.click();
+                }
             }
         });
+
         document.querySelector('body').addEventListener('touchend', (e) => {
             if (e.target.id === 'buy_btn' && e.target.parentElement.parentElement.id === 'buy_btn_container-sticky') {
-                $('.product-price-box .product-cart-btn').trigger('click');
+                const cartBtnEl = document.querySelector('.product-price-box .product-cart-btn');
+                if(cartBtnEl) {
+                    cartBtnEl.click();
+                }
             }
         });
     }
