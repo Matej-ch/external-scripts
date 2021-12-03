@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const cartProductsUrl = cartProductsScriptTag.getAttribute("data-url");
 
         async function loadProductData(ids, isWebareal = 0) {
-            let url = cartProductsUrl + ids.join('&') + '&isWebareal=' + isWebareal;
+            let url = cartProductsUrl + ids.join('&') + `&isWebareal=${isWebareal}`;
             let response = {error: 0, data: null, success: false};
             await fetch(url).then(res => res.json()).then(data => {
                 response = {error: 0, data: data, success: true};
@@ -27,8 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
             let closestTrEl = element.closest('tr.leave-note');
             let found = name.match(/\\[(.*?)\\]/g);
             let id = encodeURIComponent(found[1].replace('[', '').replace(']', ''));
-            closestTrEl.id = 'leave-note-' + id;
-            trNode.id = "availability-" + id;
+            closestTrEl.id = `leave-note-${id}`;
+            trNode.id = `availability-${id}`;
             element.closest('tbody').insertBefore(trNode, document.getElementById('leave-note-' + id));
             if (found[1]) {
                 ids.push('productsCode[]=' + id);
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             el.innerHTML = product['disp_status_text'];
                             el.style.cssText = 'font-size:18px;color:#155724;background-color:#d4edda !important;display:table-cell';
                         } else {
-                            el.innerHTML = "Tovar je aktuálne nedostupný. Dotazuj dostupnost.";
+                            el.innerHTML = "Tovar je aktuálne nedostupný. Dotazuj dostupnosť.";
                             el.style.cssText = 'font-size:18px;display:table-cell';
                         }
                     } else if (dispStatusFlag === 2) {

@@ -4,7 +4,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     const categoriesProductsUrl = categoriesScriptTag.getAttribute("data-url");
 
     async function loadProductData(ids, isWebareal = 0) {
-        let url = categoriesProductsUrl + ids.join('&') + '&isWebareal=' + isWebareal;
+        let url = categoriesProductsUrl + ids.join('&') + `&isWebareal=${isWebareal}`;
         let response = {error: 0, data: null, success: false};
         await fetch(url).then(res => res.json()).then(data => {
             response = {error: 0, data: data, success: true};
@@ -21,13 +21,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
         let cleanIDs = [];
         productEls.forEach(function (el) {
             cleanIDs.push(el.dataset.id);
-            ids.push('productsCode[]=' + el.dataset.id);
+            ids.push(`productsCode[]=${el.dataset.id}`);
         });
 
         let loadPromise = loadProductData(ids, 1);
         loadPromise.then(response => {
             cleanIDs.forEach(function (id) {
-                let productEl = document.querySelector('.product.tab_img160[data-id="' + id + '"]');
+                let productEl = document.querySelector(`.product.tab_img160[data-id="${id}"]`);
                 let el;
                 if (productEl.querySelector('.stock_yes')) {
                     el = productEl.querySelector('.stock_yes');
@@ -54,7 +54,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         let piecesOnStorage = product['allStorages'][5]['disposable_quantity'];
                         let msg = '';
                         if (piecesOnStorage > 0 && piecesOnStorage <= 5) {
-                            msg = 'Na sklade ' + piecesOnStorage + 'ks';
+                            msg =`Na sklade ${piecesOnStorage}ks`;
                         } else {
                             msg = 'Na sklade > 5ks';
                         }

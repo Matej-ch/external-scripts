@@ -46,7 +46,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                 let tableCell = document.getElementById(index);
 
                                 if (value['disposition'] > 0 && value['disposition'] <= 5) {
-                                    tableCell.innerHTML = value['disposition'] + 'ks - Expedujeme ihneď';
+                                    tableCell.innerHTML = `${value['disposition']}ks - Expedujeme ihneď`;
                                     tableCell.style.cssText = 'font-size:16px;font-weight:bold;color:#155724;background-color:#d4edda';
                                 } else if (value['disposition'] > 5) {
                                     tableCell.innerHTML = 'Na sklade > 5ks - Expedujeme ihneď';
@@ -58,7 +58,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     let piecesOnStorage = value['allStorages'][5]['disposable_quantity'];
                                     let msg;
                                     if (piecesOnStorage > 0 && piecesOnStorage <= 5) {
-                                        msg = 'Na sklade ' + piecesOnStorage + 'ks';
+                                        msg =`Na sklade ${piecesOnStorage}ks`;
                                     } else {
                                         msg = 'Na sklade > 5ks';
                                     }
