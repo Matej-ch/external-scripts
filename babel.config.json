@@ -3,5 +3,8 @@
     "@babel/preset-env",
     "minify"
   ],
-  "comments": false
+  "comments": false,
+  "plugins": [
+    ["@babel/transform-runtime"]
+  ]
 }
