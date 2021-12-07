@@ -1,6 +1,6 @@
 {
   "name": "@mtjch/eshop_ext_scripts",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Collection of scripts for third party eshops",
   "publishConfig": {
     "access": "public"

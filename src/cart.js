@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
             trNode.innerHTML = "<td colspan='7'></td>";
             let name = element.name;
             let closestTrEl = element.closest('tr.leave-note');
-            let found = name.match(/\\[(.*?)\\]/g);
+            let found = name.match(/\[(.*?)\]/g);
             let id = encodeURIComponent(found[1].replace('[', '').replace(']', ''));
             closestTrEl.id = `leave-note-${id}`;
             trNode.id = `availability-${id}`;
