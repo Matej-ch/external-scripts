@@ -9,10 +9,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
             const tableProductList = document.querySelectorAll(".productList")[0].tBodies[0];
             if (tableProductList !== null) {
                 var productCodesString = [];
-                for (var i = 0; i < tableProductList.rows.length ; i++) {
+                for (var i = 0; i < tableProductList.rows.length; i++) {
                     let row = tableProductList.rows[i];
                     let htmlString = '';
-                    for (var j = 0; j < row.cells.length ; j++) {
+                    for (var j = 0; j < row.cells.length; j++) {
                         let cell = row.cells[j];
                         if (cell.className === "product_name_cell") {
                             htmlString = cell.getElementsByTagName('a')[0].innerHTML.split('<br>')[0].trim();
@@ -42,7 +42,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     fetch(urlForProducts)
                         .then(res => res.json())
                         .then(data => {
-                            data.forEach((value, index) => {
+                            for (const [index, value] of Object.entries(data)) {
                                 let tableCell = document.getElementById(index);
 
                                 if (value['disposition'] > 0 && value['disposition'] <= 5) {
@@ -58,7 +58,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                     let piecesOnStorage = value['allStorages'][5]['disposable_quantity'];
                                     let msg;
                                     if (piecesOnStorage > 0 && piecesOnStorage <= 5) {
-                                        msg =`Na sklade ${piecesOnStorage}ks`;
+                                        msg = `Na sklade ${piecesOnStorage}ks`;
                                     } else {
                                         msg = 'Na sklade > 5ks';
                                     }
@@ -89,10 +89,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         tableCell.style.cssText = '';
                                     }
                                 }
-
-                            })
+                            }
                         })
-                        .catch(err => console.error('Error in loading data for products table',err))
+                        .catch(err => console.error('Error in loading data for products table', err))
                 }
 
                 getDataForProductsTable();
