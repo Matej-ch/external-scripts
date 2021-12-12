@@ -93,24 +93,35 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     const centerPageEl = document.getElementById('centerpage');
     if(centerPageEl) {
-        centerPageEl.querySelector('a[data-page]').addEventListener('click', async function () {
-            await waitForLoad(1000);
-            await loadStoragesForCategories();
-        })
+        let dataPage = centerPageEl.querySelector('a[data-page]');
+        let dataSorting = centerPageEl.querySelector('a[data-sorting]');
+        let filterValues = centerPageEl.querySelector('input.filter_values');
+        let filterButton = centerPageEl.querySelector('.cancel_filter_button');
 
-        centerPageEl.querySelector('a[data-sorting]').addEventListener('click', async function () {
-            await waitForLoad(1000);
-            await loadStoragesForCategories();
-        })
+        if(dataPage) {
+            dataPage.addEventListener('click', async function () {
+                await waitForLoad(1000);
+                await loadStoragesForCategories();
+            })
+        }
 
-        centerPageEl.querySelector('input.filter_values').addEventListener('click', async function () {
-            await waitForLoad(1000);
-            await loadStoragesForCategories();
-        })
-
-        centerPageEl.querySelector('.cancel_filter_button').addEventListener('click', async function () {
-            await waitForLoad(1000);
-            await loadStoragesForCategories();
-        })
+        if(dataSorting) {
+            dataSorting.addEventListener('click', async function () {
+                await waitForLoad(1000);
+                await loadStoragesForCategories();
+            })
+        }
+        if(filterValues) {
+            filterValues.addEventListener('click', async function () {
+                await waitForLoad(1000);
+                await loadStoragesForCategories();
+            })
+        }
+        if(filterButton) {
+            filterButton.addEventListener('click', async function () {
+                await waitForLoad(1000);
+                await loadStoragesForCategories();
+            })
+        }
     }
 });
