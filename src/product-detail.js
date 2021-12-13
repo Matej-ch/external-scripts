@@ -163,7 +163,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
         const productCategoriesUrl = productDetailScriptTag.getAttribute("data-cat-url");
 
-        /*fetch(productCategoriesUrl + productID)
+        fetch(productCategoriesUrl + productID)
             .then(res => res.json())
             .then(data => {
                 if (data['success'] === true && data['categories']) {
@@ -178,11 +178,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     }
 
                     if(whereIEl) {
-                        whereIEl.appendChild(catHtml)
+                        whereIEl.insertAdjacentHTML('beforeend',catHtml)
                     }
                 }
             })
-            .catch(err => console.error('Error fetching product categories',err))*/
+            .catch(err => console.error('Error fetching product categories',err))
 
 
         document.querySelector('body').addEventListener('click',e => {
