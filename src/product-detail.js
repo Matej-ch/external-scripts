@@ -279,6 +279,52 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 }
             }
         });
+
+        if (document.querySelector('.header-slider2') && document.querySelector('.header-slider2').classList.contains('active')) {
+            function showContinueBtn() {
+                let divEl = document.createElement('div');
+                let input = document.createElement('input');
+                divEl.classList.add('submit_btn_container-sticky');
+                divEl.id = 'submit_btn_container_sticky';
+                input.id = 'sticky_submit_btn';
+                input.setAttribute('type', 'submit');
+                input.setAttribute('name', 'send_order_submit');
+                input.setAttribute('value', 'Pokračovať');
+                divEl.appendChild(input);
+                document.querySelector('.continue-sticky__container').classList.add('affix');
+                document.querySelector('.continue-sticky__container').appendChild(divEl);
+            }
+
+            var deliveryInfoWasScrolled = false;
+            var continueElementTarget = document.querySelector(".buttons .fright.finish_order_bottom_right");
+            var continueStickyContainer = document.querySelector('.continue-sticky__container');
+            window.addEventListener("scroll", function () {
+                showFixedBtn();
+            });
+            showFixedBtn();
+
+            function showFixedBtn() {
+                if (!isInViewport(continueElementTarget) && !deliveryInfoWasScrolled) {
+                    showContinueBtn();
+                    deliveryInfoWasScrolled = true;
+                } else if (isInViewport(continueElementTarget) && continueStickyContainer.classList.contains('affix')) {
+                    deliveryInfoWasScrolled = false;
+                    document.querySelector('.continue-sticky__container').classList.remove('affix');
+                    document.querySelector('.continue-sticky__container').innerHTML = '';
+                }
+            }
+
+            document.querySelector('body').addEventListener('click', (e) => {
+                if (e.target.id === 'sticky_submit_btn') {
+                    document.querySelector('.order_data_form').submit();
+                }
+            });
+            document.querySelector('body').addEventListener('touchend', (e) => {
+                if (e.target.id === 'sticky_submit_btn') {
+                    document.querySelector('.order_data_form').submit();
+                }
+            });
+        }
     }
 });
 
