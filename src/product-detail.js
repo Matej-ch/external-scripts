@@ -2,6 +2,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
     var suppAvailability = 0;
     var ourAvailability = 0;
 
+    if (document.getElementById('basket_payments_list') && document.getElementById('postovne_form2_3035')) {
+        let trustPayRow = document.getElementById('postovne_form2_3035').closest('tr');
+        trustPayRow.classList.add('trustpay');
+    }
+
     function isInViewport(elem) {
         const bounding = elem.getBoundingClientRect();
         return (
