@@ -21,6 +21,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         const productDetailScriptTag = document.getElementById('product-detail-script')
         const productDetailUrl = productDetailScriptTag.getAttribute("data-url");
         const baseUrl = productDetailScriptTag.getAttribute("data-base-url");
+        const visitorUrl = productDetailScriptTag.getAttribute("data-visitor-url");
 
         var codeTrimmed = '';
 
@@ -153,8 +154,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 .then(data => {
                     const ip = data['ip'];
                     const country_code = 'SK';
-                    const visitor_url = "URL HERE" + codeTrimmed + "&ip=" + ip + "&country=" + country_code + "&eshopID=1";
-                    fetch(visitor_url);
+                    fetch(`${visitorUrl}${codeTrimmed}&ip=${ip}&country=${country_code}&eshopID=1`);
 
                 }).catch(err => console.error('Error Get ip from ipify: ', err))
         }

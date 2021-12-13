@@ -12,4 +12,4 @@ cart.js needs `data-url` attribute and id `cart-products-script`
 
 categories.js needs `data-url` attribute and id `categories-products-script`
 
-product-detail.js needs `data-url` attribute and `data-cat-url`  and `data-base-url` and id `product-detail-script`
+product-detail.js needs `data-url` attribute and `data-cat-url`, `data-base-url` and `data-visitor-url` and id `product-detail-script`
