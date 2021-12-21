@@ -68,14 +68,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                 el.style.cssText = 'font-size:16px;color:#155724;background-color:#d4edda';
                             } else {
                                 el.innerHTML = "Tovar je aktuálne nedostupný. Dotazuj dostupnost.";
-                                el.style.cssText = 'font-size:16px';
+                                el.style.cssText = 'font-size:14px';
                             }
                         } else if (dispStatusFlag === 2) {
                             el.innerHTML = product['disp_status_text'];
                             el.style.cssText = 'font-size:16px';
                         } else if (dispStatusFlag === 3) {
                             el.innerHTML = product['disp_status_text'];
-                            el.style.cssText = 'font-size:16px';
+                            el.style.cssText = 'font-size:14px';
                         }
                     }
                 }
