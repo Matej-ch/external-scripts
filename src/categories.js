@@ -43,13 +43,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
                     if (product['disposition'] > 0 && product['disposition'] <= 5) {
                         el.innerHTML = product['disposition'] + 'ks - Expedujeme ihneď';
-                        el.style.cssText = 'font-size:18px;color:#155724;background-color:#d4edda';
+                        el.style.cssText = 'font-size:16px;color:#155724;background-color:#d4edda';
                     } else if (product['disposition'] > 5) {
                         el.innerHTML = 'Na sklade > 5ks - Expedujeme ihneď';
-                        el.style.cssText = 'font-size:18px;color:#155724;background-color:#d4edda';
+                        el.style.cssText = 'font-size:16px;color:#155724;background-color:#d4edda';
                     } else if (product['disposition'] <= 5 && typeof product['allStorages'] !== 'undefined' && typeof product['allStorages'][6] !== 'undefined' && product['allStorages'][6]['disposable_quantity'] > 0) {
                         el.innerHTML = 'Dostupné Showroom Liptovský Mikuláš - expedovanie v nasledujúci pracovný deň';
-                        el.style.cssText = 'font-size:18px;color:#155724;background-color:#d4edda';
+                        el.style.cssText = 'font-size:16px;color:#155724;background-color:#d4edda';
                     } else if (product['disposition'] <= 5 && typeof product['allStorages'] !== 'undefined' && typeof product['allStorages'][5] !== 'undefined' && product['allStorages'][5]['disposable_quantity'] > 0) {
                         let piecesOnStorage = product['allStorages'][5]['disposable_quantity'];
                         let msg = '';
@@ -59,23 +59,23 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             msg = 'Na sklade > 5ks';
                         }
                         el.innerHTML = msg;
-                        el.style.cssText = 'font-size:18px;color:#155724;background-color:#d4edda';
+                        el.style.cssText = 'font-size:16px;color:#155724;background-color:#d4edda';
                     } else {
                         let dispStatusFlag = parseInt(product['disp_status_flag']);
                         if (dispStatusFlag === 1) {
                             if (parseInt(product['supp_availability']) > 5) {
                                 el.innerHTML = "U dodávateľa. Dodanie 7-10 dní.";
-                                el.style.cssText = 'font-size:18px;color:#155724;background-color:#d4edda';
+                                el.style.cssText = 'font-size:16px;color:#155724;background-color:#d4edda';
                             } else {
                                 el.innerHTML = "Tovar je aktuálne nedostupný. Dotazuj dostupnost.";
-                                el.style.cssText = 'font-size:18px';
+                                el.style.cssText = 'font-size:16px';
                             }
                         } else if (dispStatusFlag === 2) {
                             el.innerHTML = product['disp_status_text'];
-                            el.style.cssText = 'font-size:18px';
+                            el.style.cssText = 'font-size:16px';
                         } else if (dispStatusFlag === 3) {
                             el.innerHTML = product['disp_status_text'];
-                            el.style.cssText = 'font-size:18px';
+                            el.style.cssText = 'font-size:16px';
                         }
                     }
                 }
