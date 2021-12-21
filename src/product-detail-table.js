@@ -44,16 +44,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         .then(data => {
                             for (const [index, value] of Object.entries(data)) {
                                 let tableCell = document.getElementById(index);
-                                tableCell.style.minWidth = '200px;'
                                 if (value['disposition'] > 0 && value['disposition'] <= 5) {
                                     tableCell.innerHTML = `${value['disposition']}ks - Expedujeme ihneď`;
-                                    tableCell.style.cssText = 'font-size:14px;font-weight:bold;color:#155724;background-color:#d4edda';
+                                    tableCell.style.cssText = 'font-size:14px;font-weight:bold;color:#155724;background-color:#d4edda;min-width:200px';
                                 } else if (value['disposition'] > 5) {
                                     tableCell.innerHTML = 'Na sklade > 5ks - Expedujeme ihneď';
-                                    tableCell.style.cssText = 'font-size:14px;font-weight:bold;color:#155724;background-color:#d4edda ';
+                                    tableCell.style.cssText = 'font-size:14px;font-weight:bold;color:#155724;background-color:#d4edda;min-width:200px';
                                 } else if (value['disposition'] < 5 && typeof value['allStorages'] !== 'undefined' && typeof value['allStorages'][6] !== 'undefined' && value['allStorages'][6]['disposable_quantity'] > 0) {
                                     tableCell.innerHTML = 'Dostupné Showroom Liptovský Mikuláš - expedovanie v nasledujúci pracovný deň';
-                                    tableCell.style.cssText = 'font-size:14px;color:#155724;background-color:#d4edda';
+                                    tableCell.style.cssText = 'font-size:14px;color:#155724;background-color:#d4edda;min-width:200px';
                                 } else if (value['disposition'] < 5 && typeof value['allStorages'] !== 'undefined' && typeof value['allStorages'][5] !== 'undefined' && value['allStorages'][5]['disposable_quantity'] > 0) {
                                     let piecesOnStorage = value['allStorages'][5]['disposable_quantity'];
                                     let msg;
@@ -63,30 +62,26 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         msg = 'Na sklade > 5ks';
                                     }
                                     tableCell.innerHTML = msg;
-                                    tableCell.style.cssText = 'font-size:14px;color:#155724;background-color:#d4edda';
+                                    tableCell.style.cssText = 'font-size:14px;color:#155724;background-color:#d4edda;min-width:200px';
                                 } else {
                                     let dispStatusFlag = parseInt(value['disp_status_flag']);
                                     let disp_status_id = parseInt(value['disp_status']);
                                     if (dispStatusFlag === 1) {
                                         if (parseInt(value['supp_availability']) > 5) {
                                             tableCell.innerHTML = value['disp_status_text'];
-                                            tableCell.style.fontSize = '16px';
-                                            tableCell.style.cssText = 'font-weight:bold;color:#155724;background-color:#d4edda;';
+                                            tableCell.style.cssText = 'font-size:16px;font-weight:bold;color:#155724;background-color:#d4edda;min-width:200px';
                                         } else {
                                             tableCell.innerHTML = "Tovar je aktuálne nedostupný. Dotazuj dostupnosť.";
-                                            tableCell.style.fontSize = '12px';
-                                            tableCell.style.cssText = '';
+                                            tableCell.style.cssText = 'font-size:12px;min-width:200px';
                                         }
                                     } else if (dispStatusFlag === 2) {
                                         tableCell.innerHTML = value['disp_status_text'];
-                                        tableCell.style.fontSize = '14px';
                                         if (disp_status_id === 1) {
-                                            tableCell.style.cssText = 'font-weight:bold;color:#155724;background-color:#d4edda;';
+                                            tableCell.style.cssText = 'font-size:14px;font-weight:bold;color:#155724;background-color:#d4edda;min-width:200px';
                                         }
                                     } else if (dispStatusFlag === 3) {
                                         tableCell.innerHTML = value['disp_status_text'];
-                                        tableCell.style.fontSize = '12px';
-                                        tableCell.style.cssText = '';
+                                        tableCell.style.cssText = 'font-size:12px;min-width:200px';
                                     }
                                 }
                             }
