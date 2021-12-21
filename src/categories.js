@@ -99,6 +99,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
         let filterValues = centerPageEl.querySelector('input.filter_values');
         let filterButton = centerPageEl.querySelector('.cancel_filter_button');
 
+        console.log(dataSorting);
+
         if(dataPage) {
             dataPage.addEventListener('click', async function () {
                 await waitForLoad(1000);
@@ -108,6 +110,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
         if(dataSorting) {
             dataSorting.addEventListener('click', async function () {
+                console.log('click');
                 await waitForLoad(1000);
                 await loadStoragesForCategories();
             })
