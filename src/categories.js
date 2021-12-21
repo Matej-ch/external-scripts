@@ -43,13 +43,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
                     if (product['disposition'] > 0 && product['disposition'] <= 5) {
                         el.innerHTML = product['disposition'] + 'ks - Expedujeme ihneď';
-                        el.style.cssText = 'font-size:16px;color:#155724;background-color:#d4edda';
+                        el.style.cssText = 'font-size:14px;color:#155724';
                     } else if (product['disposition'] > 5) {
                         el.innerHTML = 'Na sklade > 5ks - Expedujeme ihneď';
-                        el.style.cssText = 'font-size:16px;color:#155724;background-color:#d4edda';
+                        el.style.cssText = 'font-size:14px;color:#155724';
                     } else if (product['disposition'] <= 5 && typeof product['allStorages'] !== 'undefined' && typeof product['allStorages'][6] !== 'undefined' && product['allStorages'][6]['disposable_quantity'] > 0) {
                         el.innerHTML = 'Dostupné Showroom Liptovský Mikuláš - expedovanie v nasledujúci pracovný deň';
-                        el.style.cssText = 'font-size:16px;color:#155724;background-color:#d4edda';
+                        el.style.cssText = 'font-size:14px;color:#155724';
                     } else if (product['disposition'] <= 5 && typeof product['allStorages'] !== 'undefined' && typeof product['allStorages'][5] !== 'undefined' && product['allStorages'][5]['disposable_quantity'] > 0) {
                         let piecesOnStorage = product['allStorages'][5]['disposable_quantity'];
                         let msg = '';
@@ -59,20 +59,20 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             msg = 'Na sklade > 5ks';
                         }
                         el.innerHTML = msg;
-                        el.style.cssText = 'font-size:16px;color:#155724;background-color:#d4edda';
+                        el.style.cssText = 'font-size:14px;color:#155724';
                     } else {
                         let dispStatusFlag = parseInt(product['disp_status_flag']);
                         if (dispStatusFlag === 1) {
                             if (parseInt(product['supp_availability']) > 5) {
                                 el.innerHTML = "U dodávateľa. Dodanie 7-10 dní.";
-                                el.style.cssText = 'font-size:16px;color:#155724;background-color:#d4edda';
+                                el.style.cssText = 'font-size:14px;color:#155724';
                             } else {
                                 el.innerHTML = "Tovar je aktuálne nedostupný. Dotazuj dostupnost.";
                                 el.style.cssText = 'font-size:14px';
                             }
                         } else if (dispStatusFlag === 2) {
                             el.innerHTML = product['disp_status_text'];
-                            el.style.cssText = 'font-size:16px';
+                            el.style.cssText = 'font-size:14px';
                         } else if (dispStatusFlag === 3) {
                             el.innerHTML = product['disp_status_text'];
                             el.style.cssText = 'font-size:14px';
@@ -94,37 +94,45 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     const centerPageEl = document.getElementById('centerpage');
     if(centerPageEl) {
-        let dataPage = centerPageEl.querySelector('a[data-page]');
-        let dataSorting = centerPageEl.querySelector('a[data-sorting]');
-        let filterValues = centerPageEl.querySelector('input.filter_values');
-        let filterButton = centerPageEl.querySelector('.cancel_filter_button');
+        let dataPage = centerPageEl.querySelectorAll('a[data-page]');
+        let dataSorting = centerPageEl.querySelectorAll('a[data-sorting]');
+        let filterValues = centerPageEl.querySelectorAll('input.filter_values');
+        let filterButton = centerPageEl.querySelectorAll('.cancel_filter_button');
 
         console.log(dataSorting);
 
         if(dataPage) {
-            dataPage.addEventListener('click', async function () {
-                await waitForLoad(1000);
-                await loadStoragesForCategories();
+            dataPage.forEach(el => {
+                el.addEventListener('click', async function () {
+                    await waitForLoad(1000);
+                    await loadStoragesForCategories();
+                })
             })
         }
 
         if(dataSorting) {
-            dataSorting.addEventListener('click', async function () {
-                console.log('click');
-                await waitForLoad(1000);
-                await loadStoragesForCategories();
-            })
+            dataSorting.forEach(el => {
+                el.addEventListener('click', async function () {
+                    console.log('click');
+                    await waitForLoad(1000);
+                    await loadStoragesForCategories();
+                })
+            });
         }
         if(filterValues) {
-            filterValues.addEventListener('click', async function () {
-                await waitForLoad(1000);
-                await loadStoragesForCategories();
-            })
+            filterValues.forEach(el => {
+                el.addEventListener('click', async function () {
+                    await waitForLoad(1000);
+                    await loadStoragesForCategories();
+                })
+            });
         }
         if(filterButton) {
-            filterButton.addEventListener('click', async function () {
-                await waitForLoad(1000);
-                await loadStoragesForCategories();
+            filterButton.forEach(el => {
+                el.addEventListener('click', async function () {
+                    await waitForLoad(1000);
+                    await loadStoragesForCategories();
+                })
             })
         }
     }
