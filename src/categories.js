@@ -94,23 +94,31 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     const centerPageEl = document.getElementById('centerpage');
     if(centerPageEl) {
-        let dataPage = centerPageEl.querySelectorAll('a[data-page]');
-        let dataSorting = centerPageEl.querySelectorAll('a[data-sorting]');
+        //let dataPage = centerPageEl.querySelectorAll('a[data-page]');
+        //let dataSorting = centerPageEl.querySelectorAll('a[data-sorting]');
         let filterValues = centerPageEl.querySelectorAll('input.filter_values');
         let filterButton = centerPageEl.querySelectorAll('.cancel_filter_button');
 
-        console.log(dataSorting);
+        document.querySelector('#centerpage').addEventListener('click',async function(e) {
 
-        if(dataPage) {
+            if(e.target.classList.contains('sorting_item') ||
+                e.target.hasAttribute('data-sorting') ||
+                e.target.hasAttribute('data-page')) {
+                await waitForLoad(1000);
+                await loadStoragesForCategories();
+            }
+        })
+
+        /*if(dataPage) {
             dataPage.forEach(el => {
                 el.addEventListener('click', async function () {
                     await waitForLoad(1000);
                     await loadStoragesForCategories();
                 })
             })
-        }
+        }*/
 
-        if(dataSorting) {
+        /*if(dataSorting) {
             dataSorting.forEach(el => {
                 el.addEventListener('click', async function () {
                     console.log('click');
@@ -118,7 +126,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     await loadStoragesForCategories();
                 })
             });
-        }
+        }*/
         if(filterValues) {
             filterValues.forEach(el => {
                 el.addEventListener('click', async function () {
