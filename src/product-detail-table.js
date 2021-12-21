@@ -76,6 +76,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                                         }
                                     } else if (dispStatusFlag === 2) {
                                         tableCell.innerHTML = value['disp_status_text'];
+                                        tableCell.style.cssText = "font-size:14px;min-width:200px";
                                         if (disp_status_id === 1) {
                                             tableCell.style.cssText = 'font-size:14px;font-weight:bold;color:#155724;background-color:#d4edda;min-width:200px';
                                         }
