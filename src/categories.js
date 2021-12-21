@@ -88,7 +88,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
     }
 
     if (document.querySelector('.product.tab_img160')) {
-        loadStoragesForCategories();
+        setTimeout(() => {loadStoragesForCategories();}, 500);
+
     }
 
     const centerPageEl = document.getElementById('centerpage');
