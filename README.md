@@ -31,3 +31,5 @@ product-detail.js needs `data-url` attribute and `data-cat-url`, `data-base-url`
 <script src="https://cdn.jsdelivr.net/npm/@mtjch/eshop_ext_scripts@2.0.0/build/product-detail-table.js" id="products-table-script" data-url=""></script>
 
 ```
+
+<script src="https://cdn.jsdelivr.net/npm/@mtjch/eshop_ext_scripts@2.0.5/src/categories.js" id="categories-products-script" data-url="https://storehouse.megakupa.sk/product/data-for-multiple-products?"></script>

@@ -43,13 +43,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
                     if (product['disposition'] > 0 && product['disposition'] <= 5) {
                         el.innerHTML = product['disposition'] + 'ks - Expedujeme ihneď';
-                        el.style.cssText = 'font-size:14px;color:#155724';
+                        el.style.cssText = 'font-size:14px;color:#34d22f';
                     } else if (product['disposition'] > 5) {
                         el.innerHTML = 'Na sklade > 5ks - Expedujeme ihneď';
-                        el.style.cssText = 'font-size:14px;color:#155724';
+                        el.style.cssText = 'font-size:14px;color:#34d22f';
                     } else if (product['disposition'] <= 5 && typeof product['allStorages'] !== 'undefined' && typeof product['allStorages'][6] !== 'undefined' && product['allStorages'][6]['disposable_quantity'] > 0) {
                         el.innerHTML = 'Dostupné Showroom Liptovský Mikuláš - expedovanie v nasledujúci pracovný deň';
-                        el.style.cssText = 'font-size:14px;color:#155724';
+                        el.style.cssText = 'font-size:14px;color:#34d22f';
                     } else if (product['disposition'] <= 5 && typeof product['allStorages'] !== 'undefined' && typeof product['allStorages'][5] !== 'undefined' && product['allStorages'][5]['disposable_quantity'] > 0) {
                         let piecesOnStorage = product['allStorages'][5]['disposable_quantity'];
                         let msg = '';
@@ -59,13 +59,13 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             msg = 'Na sklade > 5ks';
                         }
                         el.innerHTML = msg;
-                        el.style.cssText = 'font-size:14px;color:#155724';
+                        el.style.cssText = 'font-size:14px;color:#34d22f';
                     } else {
                         let dispStatusFlag = parseInt(product['disp_status_flag']);
                         if (dispStatusFlag === 1) {
                             if (parseInt(product['supp_availability']) > 5) {
                                 el.innerHTML = "U dodávateľa. Dodanie 7-10 dní.";
-                                el.style.cssText = 'font-size:14px;color:#155724';
+                                el.style.cssText = 'font-size:14px;color:#34d22f';
                             } else {
                                 el.innerHTML = "Tovar je aktuálne nedostupný. Dotazuj dostupnost.";
                                 el.style.cssText = 'font-size:14px';
@@ -89,59 +89,24 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     if (document.querySelector('.product.tab_img160')) {
         setTimeout(() => {loadStoragesForCategories();}, 500);
-
     }
 
     const centerPageEl = document.getElementById('centerpage');
     if(centerPageEl) {
-        //let dataPage = centerPageEl.querySelectorAll('a[data-page]');
-        //let dataSorting = centerPageEl.querySelectorAll('a[data-sorting]');
-        let filterValues = centerPageEl.querySelectorAll('input.filter_values');
-        let filterButton = centerPageEl.querySelectorAll('.cancel_filter_button');
-
         document.querySelector('#centerpage').addEventListener('click',async function(e) {
 
             if(e.target.classList.contains('sorting_item') ||
                 e.target.hasAttribute('data-sorting') ||
-                e.target.hasAttribute('data-page')) {
-                await waitForLoad(1000);
+                e.target.hasAttribute('data-page') ||
+                e.target.classList.contains('cancel_filter_button')) {
+                await waitForLoad(800);
+                await loadStoragesForCategories();
+            }
+
+            if(e.target.classList.contains('filter_values') && e.target.tagName === 'INPUT') {
+                await waitForLoad(800);
                 await loadStoragesForCategories();
             }
         })
-
-        /*if(dataPage) {
-            dataPage.forEach(el => {
-                el.addEventListener('click', async function () {
-                    await waitForLoad(1000);
-                    await loadStoragesForCategories();
-                })
-            })
-        }*/
-
-        /*if(dataSorting) {
-            dataSorting.forEach(el => {
-                el.addEventListener('click', async function () {
-                    console.log('click');
-                    await waitForLoad(1000);
-                    await loadStoragesForCategories();
-                })
-            });
-        }*/
-        if(filterValues) {
-            filterValues.forEach(el => {
-                el.addEventListener('click', async function () {
-                    await waitForLoad(1000);
-                    await loadStoragesForCategories();
-                })
-            });
-        }
-        if(filterButton) {
-            filterButton.forEach(el => {
-                el.addEventListener('click', async function () {
-                    await waitForLoad(1000);
-                    await loadStoragesForCategories();
-                })
-            })
-        }
     }
 });
