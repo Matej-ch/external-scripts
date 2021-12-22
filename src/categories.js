@@ -28,17 +28,17 @@ window.addEventListener('DOMContentLoaded', (event) => {
         loadPromise.then(response => {
             cleanIDs.forEach(function (id) {
                 let productEl = document.querySelector(`.product.tab_img160[data-id="${id}"]`);
-                let el;
-                if (productEl.querySelector('.stock_yes')) {
+                let el = null;
+                if (productEl && productEl.querySelector('.stock_yes')) {
                     el = productEl.querySelector('.stock_yes');
                     el.classList.remove('stock_yes');
                 }
-                if (productEl.querySelector('.stock_no')) {
+                if (productEl && productEl.querySelector('.stock_no')) {
                     el = productEl.querySelector('.stock_no');
                     el.classList.remove('stock_no');
                 }
 
-                if (response.data[id]) {
+                if (el && response.data[id]) {
                     let product = response.data[id];
 
                     if (product['disposition'] > 0 && product['disposition'] <= 5) {
@@ -99,12 +99,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 e.target.hasAttribute('data-sorting') ||
                 e.target.hasAttribute('data-page') ||
                 e.target.classList.contains('cancel_filter_button')) {
-                await waitForLoad(800);
+                await waitForLoad(700);
                 await loadStoragesForCategories();
             }
 
             if(e.target.classList.contains('filter_values') && e.target.tagName === 'INPUT') {
-                await waitForLoad(800);
+                await waitForLoad(700);
                 await loadStoragesForCategories();
             }
         })
