@@ -42,7 +42,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 .then(res => res.json())
                 .then(data => {
                     if(data.success && data.success === false) {
-                        console.error('Error loading service data: ',data.message);
+                        console.log('No services loaded: ',data.message);
                     } else {
                         let html = '';
                         let productData = data[productCodeTrimmed];
@@ -50,7 +50,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             productData = data[productCodeTrimmed.toUpperCase()];
                         }
 
-                        if(productData['additionalServices']) {
+                        if(productData['additionalServices'] !== undefined) {
                            const services = productData['additionalServices'];
 
                             services.forEach(service => {
@@ -59,9 +59,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
                             })
                             servicesContainer.style.cssText = "display:flex;flex-direction:row;width:100%;flex-wrap";
                             servicesContainer.innerHTML = html;
-                        }
 
-                        insertAfter(servicesContainer,document.querySelector('.product-detail-container'));
+                            insertAfter(servicesContainer,document.querySelector('.product-detail-container'));
+                        }
                     }
                 })
                 .catch(err => console.error('Error loading service data: ',err))
