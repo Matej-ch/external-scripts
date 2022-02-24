@@ -4,7 +4,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         const productDetailUrl = productServicesScriptTag.getAttribute("data-url");
 
         const productCode = document.querySelector("input[name='number']"); //hidden input
-        const productCodeTrimmed = productCode.trim();
+        const productCodeTrimmed = productCode.value.trim();
         const productCodeEncoded = encodeURIComponent(productCode.value);
 
 
