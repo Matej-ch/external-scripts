@@ -26,10 +26,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
             modalContent.classList.add('js-modal-content');
             modalHeader.classList.add('js-modal-header');
 
-            modalHeader.innerHTML = '<span class="js-s-close-modal css-s-close-modal">&times;</span><h2 class="js-service-header"></h2>';
+            modalHeader.innerHTML = '<span class="js-s-close-modal css-s-close-modal">&times;</span><h2 class="js-service-header" style="font-weight: bold;font-size: 1.5em;padding: 0;"></h2>';
             modalContent.appendChild(modalHeader);
 
-            modalContent.innerHTML += `<div class="modal-body js-service-description" style="padding: 2px 16px;"></div>`;
+            modalContent.innerHTML += `<div class="modal-body js-service-description" style="padding: 16px 16px;"></div>`;
 
             modal.appendChild(modalContent);
             document.querySelector('body').appendChild(modal);
@@ -54,8 +54,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
                            const services = productData['additionalServices'];
 
                             services.forEach(service => {
-                                html += `<div class="js-s-open-modal" style="padding-right: 10px;cursor: pointer">
-<img src="${service.icon}" alt='${service.name}' title="${service.name}" style="width: 60px;height: auto;"><input type="hidden" class="js-description-value" value="${service.description}"></div>`;
+                                html += `<div style="padding-right: 10px;cursor: pointer">
+<img src="${service.icon}" alt='${service.name}' title="${service.name}" style="width: 60px;height: auto;" class="js-s-open-modal"><input type="hidden" class="js-description-value" value="${service.description}"></div>`;
                             })
                             servicesContainer.style.cssText = "display:flex;flex-direction:row;width:100%;flex-wrap";
                             servicesContainer.innerHTML = html;
