@@ -41,7 +41,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
             fetch(serviceUrl)
                 .then(res => res.json())
                 .then(data => {
-                    if(data.success && data.success === false) {
+                    if(data.success !== undefined && data.success === false) {
                         console.log('No services loaded: ',data.message);
                     } else {
                         let html = '';
