@@ -70,8 +70,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
         document.querySelector('body').addEventListener('click',e => {
             if(e.target.classList.contains('js-s-open-modal')) {
                 const modal = document.getElementById("myServiceModal");
-                modal.querySelector('.js-service-header').innerText = e.target.querySelector('img').getAttribute('alt');
-                modal.querySelector('.js-service-description').innerHTML = e.target.querySelector('.js-description-value').value;
+                modal.querySelector('.js-service-header').innerText = e.target.getAttribute('alt');
+                modal.querySelector('.js-service-description').innerHTML = e.target.parentElement.querySelector('.js-description-value').value;
                 modal.style.display = "block";
             }
 
