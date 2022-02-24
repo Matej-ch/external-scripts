@@ -7,15 +7,39 @@ window.addEventListener('DOMContentLoaded', (event) => {
         const productCodeTrimmed = productCode.value.trim();
         const productCodeEncoded = encodeURIComponent(productCode.value);
 
-
-        console.log('product code: ',productCode);
-
-        console.log('productCodeTrimmed: ',productCodeTrimmed);
-
-        console.log('productCodeEncoded: ',productCodeEncoded);
-
         const serviceUrl = productDetailUrl + productCodeEncoded;
 
-        console.log(serviceUrl);
+        const servicesContainer = document.createElement('div');
+
+        function insertAfter(newNode, referenceNode) {
+            referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+        }
+
+        if (productCodeTrimmed) {
+            fetch(serviceUrl)
+                .then(res => res.json())
+                .then(data => {
+                    if(data.success && data.success === false) {
+                        console.error('Error loading service data: ',data.message);
+                    } else {
+
+                        let productData = data[productCodeTrimmed];
+                        if (productData === undefined) {
+                            productData = data[productCodeTrimmed.toUpperCase()];
+                        }
+
+                        if(productData['additionalServices']) {
+                           const services = productData['additionalServices'];
+
+                            services.forEach(service => {
+                                console.log(service);
+                            })
+                        }
+
+                        //insertAfter(servicesContainer,document.querySelector('.product-detail-container'));
+                    }
+                })
+                .catch(err => console.error('Error loading service data: ',err))
+        }
     }
 })
