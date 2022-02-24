@@ -32,7 +32,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                            const services = productData['additionalServices'];
 
                             services.forEach(service => {
-                                html = `<div><img src="${service.icon}" alt='${service.name}' style="width: 60px;height: 60px;"></div>`;
+                                html += `<div style="padding-right: 10px;cursor: pointer"><img src="${service.icon}" alt='${service.name}' style="width: 60px;height: auto;"></div>`;
                             })
                             servicesContainer.style.cssText = "display:flex;flex-direction:row;width:100%;";
                             servicesContainer.innerHTML = html;
