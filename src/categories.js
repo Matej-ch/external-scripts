@@ -40,6 +40,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
                 if (el && response.data[id]) {
                     let product = response.data[id];
+                    const suppAvailability = product['supp_availability'];
 
                     if (product['disposition'] > 0 && product['disposition'] <= 5) {
                         el.innerHTML = product['disposition'] + 'ks - Expedujeme ihneď';
@@ -61,10 +62,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         el.innerHTML = msg;
                         el.style.cssText = 'font-size:14px;color:#34d22f';
                     } else {
-                        let dispStatusFlag = parseInt(product['disp_status_flag']);
-                        if (dispStatusFlag === 1) {
-                            if (parseInt(product['supp_availability']) > 5) {
-                                el.innerHTML = "U dodávateľa. Dodanie 7-10 dní.";
+                        const dispStatusFlag = parseInt(product['disp_status_flag']);
+                        const dispStatusId = parseInt(product['disp_status']);
+
+                        if(dispStatusId === 0 || dispStatusId === 9) {
+                            if (parseInt(suppAvailability) > 5) {
+                                el.innerHTML = product['disp_status_text'];
                                 el.style.cssText = 'font-size:14px;color:#34d22f';
                             } else {
                                 el.innerHTML = "Tovar je aktuálne nedostupný. Dotazuj dostupnost.";

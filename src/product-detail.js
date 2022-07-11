@@ -55,7 +55,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         productData = data[codeTrimmed.toUpperCase()];
                     }
 
-                    suppAvailability = productData['suppAvailability'];
+                    suppAvailability = productData['supp_availability'];
 
                     if (productData['disposition'] > 0 && productData['disposition'] <= 5) {
                         tdForInfo.innerHTML = `${productData['disposition']}ks - Expedujeme ihneď <div class="info-about-delivery"><a href="#"> Viac o dostupnosti ? </a></div>`;
@@ -89,7 +89,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                         let dispStatusFlag = parseInt(productData['disp_status_flag']);
                         var disp_status_id = parseInt(productData['disp_status']);
                         if (disp_status_id === 0 || disp_status_id === 9) {
-                            if (parseInt(productData['suppAvailability']) > 5) {
+                            if (parseInt(suppAvailability) > 5) {
                                 tdForInfo.innerHTML = productData['disp_status_text'] + ' <div class="info-about-delivery"><a href="#" data-text="' + productData['disp_status_description'] + '"> Viac o dostupnosti ? </a></div>';
                                 tdForInfo.style.fontSize ='18px';
                                 tdForInfo.style.color ='#155724';
