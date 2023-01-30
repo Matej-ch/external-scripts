@@ -55,7 +55,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
                             services.forEach(service => {
                                 html += `<div style="padding-right: 10px;cursor: pointer">
-<img src="${encodeURIComponent(service.icon)}" alt='${service.name}' title="${service.name}" style="width: 60px;height: auto;" class="js-s-open-modal"><input type="hidden" class="js-description-value" value="${service.description}"></div>`;
+<img src="${service.icon.replace(/\s/g,'%20')}" alt='${service.name}' title="${service.name}" style="width: 60px;height: auto;" class="js-s-open-modal"><input type="hidden" class="js-description-value" value="${service.description}"></div>`;
                             })
                             servicesContainer.style.cssText = "display:flex;flex-direction:row;width:100%;flex-wrap";
                             servicesContainer.innerHTML = html;
